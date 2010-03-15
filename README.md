@@ -13,6 +13,7 @@ http://opensource.plurk.com/LightCloud/
 
 You can use it with class methods:
 
+<pre>
 <code>
 require 'LiteCloud.php';
 
@@ -33,9 +34,11 @@ LiteCloud::delete("hello");
 
 print LiteCloud::get("hello"); # => nil
 </code>
+</pre>
 
 Or you can also use it with instances:
 
+<pre>
 <code>
 require 'LiteCloud.php';
 
@@ -55,6 +58,7 @@ $cloud->delete("hello");
 
 print $cloud->get("hello"); # => nil
 </code>
+</pre>
 
 ## Dependence
 
