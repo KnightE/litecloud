@@ -22,7 +22,7 @@ $config = array(
 	'lookup1_B' => '127.0.0.1:51201',
 
 	'storage1_A' => '127.0.0.1:44201',
-	'storage1_B' => '127.0.0.,:54201',
+	'storage1_B' => '127.0.0.1:54201',
 );
 
 list($lookupNodes, $storageNodes) = LiteCloud::generateNodes($config);
@@ -47,7 +47,7 @@ $config = array(
 	'lookup1_B' => '127.0.0.1:51201',
 
 	'storage1_A' => '127.0.0.1:44201',
-	'storage1_B' => '127.0.0.,:54201',
+	'storage1_B' => '127.0.0.1:54201',
 );
 
 $cloud = new LiteCloud($config);

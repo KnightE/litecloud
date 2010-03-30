@@ -1,6 +1,12 @@
 <?php
 
+// vim600: cindent tabstop=4 shiftwidth=4 
+
 class LiteCloud {
+
+	protected $_classes = array(
+		'nodeType' => 'LiteCloud_Tyrant',
+	);
 
 	public static $lookupRing;
 
@@ -29,6 +35,14 @@ class LiteCloud {
 		return array($lookupNodes, $storageNodes);
 	}
 
+	public static function config(array $config = array()) {
+		foreach ($config as $key => $val) {
+			$key = "_{$key}";
+			if (isset(static::${$key})) 
+				static::${$key} = $val + static::${$key};
+		}
+	}
+	
 	#--- Init and config ----------------------------------------------
 	public static function init($lookupNodes, $storageNodes) {
 		self::$lookupNodes	= $lookupNodes;
@@ -73,10 +87,10 @@ class LiteCloud {
 
 		static $cont = array();
 		$server = $nodes[$name];
+		$node	= self::$_classes['noteType'];
 		if(!isset($cont[$server])) {
-			list($host, $port) = explode(':', $server);
-			$cache = new Memcached;
-			$cache->addServer($host, $port);
+			// autoload?
+			$cache = new $node($name, $nodes);
 			$cont[$server] = $cache;
 		}
 
