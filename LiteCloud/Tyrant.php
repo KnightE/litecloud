@@ -23,14 +23,13 @@ class LiteCloud_Tyrant extends LiteCloud_Common {
     }
 
     private function _getConn() {
-		if(!empty($this->_conn))
-			return $this->_conn;
-
-        $cnt    				= count($this->servers);
-        $index  				= $cnt < 2 ? 0 : crc32($key) % $cnt;
-		list($host, $port)      = $this->servers[$index];
-		$this->_conn    		= new Memcached;
-		$this->_conn->addServer($host, $port);
+		if(empty($this->_conn)) {
+			$this->_conn = new Memcached;
+			foreach($this->servers as $v) {
+				list($host, $port) = $v;
+				$this->_conn->addServer($host, $port);
+			}
+		}
         return $this->_conn;
     }
 

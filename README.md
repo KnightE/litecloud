@@ -62,7 +62,7 @@ print $cloud->get("hello"); # => nil
 
 ## Dependence
 
-  sudo pecl install php-memcached
+  sudo pecl install memcached
 
 ## Known Issues / To-Do
 

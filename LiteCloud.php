@@ -4,8 +4,8 @@
 
 class LiteCloud {
 
-	protected $_classes = array(
-		'nodeType' => 'LiteCloud_Tyrant',
+	protected static $_classes = array(
+		'node' => 'LiteCloud_Tyrant',
 	);
 
 	public static $lookupRing;
@@ -87,7 +87,7 @@ class LiteCloud {
 
 		static $cont = array();
 		$server = $nodes[$name];
-		$node	= self::$_classes['noteType'];
+		$node	= self::$_classes['node'];
 		if(!isset($cont[$server])) {
 			// autoload?
 			$cache = new $node($name, $nodes);
