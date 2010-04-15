@@ -4,9 +4,11 @@
 
 class LiteCloud {
 
-	protected static $_classes = array(
-		'node' => 'LiteCloud_Tyrant',
+	protected static $_classes 	= array(
+		'storage' => 'LiteCloud_Tyrant',
 	);
+
+	protected static $_nodes	= array();
 
 	public static $lookupRing;
 
@@ -17,22 +19,7 @@ class LiteCloud {
 	public static $storageNodes = array();
 
 	public function __construct($config = array()) {
-		list($lookupNodes, $storageNodes) = self::generateNodes($config);
-		self::init($lookupNodes, $storageNodes);
-	}
-
-	public static function generateNodes($config) {
-		$lookupNodes = $storageNodes = array();
-
-		foreach($config as $key => $value){
-			if(strpos($key, 'lookup') !== false)
-				$lookupNodes[$key] = $value;
-
-			if(strpos($key, 'storage') !== false)
-				$storageNodes[$key] = $value;
-		}
-
-		return array($lookupNodes, $storageNodes);
+		self::init($config);
 	}
 
 	public static function config(array $config = array()) {
@@ -44,9 +31,16 @@ class LiteCloud {
 	}
 	
 	#--- Init and config ----------------------------------------------
-	public static function init($lookupNodes, $storageNodes) {
-		self::$lookupNodes	= $lookupNodes;
-		self::$storageNodes	= $storageNodes;
+	public static function init($config = array()) {
+		self::config($config);
+		foreach(self::$_nodes as $key => $value){
+			if(strpos($key, 'lookup') !== false)
+				self::$lookupNodes[$key] = $value;
+
+			if(strpos($key, 'storage') !== false)
+				self::$storageNodes[$key] = $value;
+		}
+
 		self::$lookupRing 	= self::generateRing($lookupNodes);
 		self::$storageRing 	= self::generateRing($storageNodes);
 	}
@@ -87,7 +81,7 @@ class LiteCloud {
 
 		static $cont = array();
 		$server = $nodes[$name];
-		$node	= self::$_classes['node'];
+		$node	= self::$_classes['storage'];
 		if(!isset($cont[$server])) {
 			// autoload?
 			$cache = new $node($name, $nodes);

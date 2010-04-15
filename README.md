@@ -18,15 +18,19 @@ You can use it with class methods:
 require 'LiteCloud.php';
 
 $config = array(
-	'lookup1_A' => '127.0.0.1:41201',
-	'lookup1_B' => '127.0.0.1:51201',
+	'classes' => array(
+		'storage' 	=> 'LiteCloud_Tyrant',
+	),
+	'nodes' => array(	
+		'lookup1_A' => '127.0.0.1:41201',
+		'lookup1_B' => '127.0.0.1:51201',
 
-	'storage1_A' => '127.0.0.1:44201',
-	'storage1_B' => '127.0.0.1:54201',
+		'storage1_A' => '127.0.0.1:44201',
+		'storage1_B' => '127.0.0.1:54201',
+	),
 );
 
-list($lookupNodes, $storageNodes) = LiteCloud::generateNodes($config);
-LiteCloud::init($lookupNodes, $storageNodes);
+LiteCloud::init($config);
 
 LiteCloud::set('hello', 'world');
 print LiteCloud::get("hello"); # => world
@@ -43,11 +47,13 @@ Or you can also use it with instances:
 require 'LiteCloud.php';
 
 $config = array(
-	'lookup1_A' => '127.0.0.1:41201',
-	'lookup1_B' => '127.0.0.1:51201',
+	'nodes' => array(	
+		'lookup1_A' => '127.0.0.1:41201',
+		'lookup1_B' => '127.0.0.1:51201',
 
-	'storage1_A' => '127.0.0.1:44201',
-	'storage1_B' => '127.0.0.1:54201',
+		'storage1_A' => '127.0.0.1:44201',
+		'storage1_B' => '127.0.0.1:54201',
+	),
 );
 
 $cloud = new LiteCloud($config);
