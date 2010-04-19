@@ -25,6 +25,7 @@ class LiteCloud_Tyrant extends LiteCloud_Common {
     private function _getConn() {
 		if(empty($this->_conn)) {
 			$this->_conn = new Memcached;
+			$this->_conn->setOption(Memcached::OPT_AUTO_EJECT_HOSTS, true);
 			foreach($this->servers as $v) {
 				list($host, $port) = $v;
 				$this->_conn->addServer($host, $port);
