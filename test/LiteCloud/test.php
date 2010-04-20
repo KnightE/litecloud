@@ -1,16 +1,21 @@
 <?php
 $root = dirname(__FILE__) . '/../../';
 include_once("$root/LiteCloud.php");
+include_once("$root/LiteCloud/Tyrant.php");
 
 //-------------------------------------------------------
-$config['lookup1_A'] = '127.0.0.1:41201';
-$config['lookup1_B'] = '127.0.0.1:51201';
+$config = array(
+    'nodes' => array(   
+        'lookup1_A' => array('127.0.0.1:41201'),
+        'lookup1_B' => array('127.0.0.1:51201'),
 
-$config['storage1_A'] = '127.0.0.1:44201';
-$config['storage1_B'] = '127.0.0.1:54201';
+        'storage1_A' => array('127.0.0.1:44201'),
+        'storage1_B' => array('127.0.0.1:54201'),
+    ),
+);
 
-list($lookupNodes, $storageNodes) = LiteCloud::generateNodes($config);
-LiteCloud::init($lookupNodes, $storageNodes);
+
+LiteCloud::init($config);
 
 $key = 'hello';
 $value = 'world';
