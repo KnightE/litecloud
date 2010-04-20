@@ -25,8 +25,8 @@ class LiteCloud {
 	public static function config(array $config = array()) {
 		foreach ($config as $key => $val) {
 			$key = "_{$key}";
-			if (isset(static::${$key})) 
-				static::${$key} = $val + static::${$key};
+			if (isset(self::${$key})) 
+				self::${$key} = $val + self::${$key};
 		}
 	}
 	
