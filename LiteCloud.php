@@ -41,8 +41,8 @@ class LiteCloud {
 				self::$storageNodes[$key] = $value;
 		}
 
-		self::$lookupRing 	= self::generateRing($lookupNodes);
-		self::$storageRing 	= self::generateRing($storageNodes);
+		self::$lookupRing 	= self::generateRing(self::$lookupNodes);
+		self::$storageRing 	= self::generateRing(self::$storageNodes);
 	}
 
 	public static function generateRing(array $nodes) {
