@@ -82,13 +82,13 @@ class LiteCloud {
 		static $cont = array();
 		$server = $nodes[$name];
 		$node	= self::$_classes['storage'];
-		if(!isset($cont[$server])) {
+		if(!isset($cont[$name])) {
 			// autoload?
 			$cache = new $node($name, $nodes);
-			$cont[$server] = $cache;
+			$cont[$name] = $cache;
 		}
 
-		return $cont[$server];
+		return $cont[$name];
 	}
 
 	public static function locateLookupNode($key) {
