@@ -11,15 +11,15 @@ class LiteCloud_Tyrant extends LiteCloud_Common {
     }
 
     public function set($key, $value) {
-        return $this->_getConn()->put($key, $value);
+        return $this->_getConn()->set($key, $value);
     }
 
     public function incr($key, $delta = 1) {
-        return $this->_getConn()->add($key, $delta);
+        return $this->_getConn()->increment($key, $delta);
     }
 
     public function delete($key) {
-        return $this->_getConn()->out($key);
+        return $this->_getConn()->delete($key);
     }
 
     private function _getConn() {
